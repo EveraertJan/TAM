@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  api:
+    command: ["npm", "run", "start:dev"]
+    ports:
+      - ${BACK_PORT}:3000 
+  front:
+    ports:
+      - ${FRONT_PORT}:3000
+    environment:
+      REACT_APP_API_URL: "http://localhost:${BACK_PORT}/"
+  store:
+    ports:
+      - ${STORE_PORT}:5432
