@@ -74,16 +74,36 @@ class App {
     });
 
 
-
-    await this.pg.schema.createTableIfNotExists('tokens', function (table) {
+    await this.pg.schema.createTableIfNotExists('relations', function (table) {
       table.increments();
+      table.uuid("uuid");
+      table.string("call");
+      table.uuid("parent");
+      table.uuid("child");
+      table.integer("status");
+      table.integer("rights")
       table.timestamps(true, true);
-      table.uuid("user");
-      table.string("token");
-      table.dateTime("expires_on");
     }).then(function() {
-      console.log("created tokens")
+      console.log("created relations")
     });
+
+
+    await this.pg.schema.createTableIfNotExists('userInfo', function (table) {
+      table.increments();
+      table.uuid("uuid");
+      table.string("user_id");
+      table.integer("weight");
+      table.string("weight_unit");
+      table.integer("length");
+      table.string("length_unit");
+      table.string("place");
+      table.string("time");
+      table.timestamps(true, true);
+    }).then(function() {
+      console.log("created userInfo")
+    });
+
+
 
 
     await this.pg.schema.createTableIfNotExists('posts', function (table) {
