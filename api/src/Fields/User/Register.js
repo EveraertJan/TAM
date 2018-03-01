@@ -47,7 +47,8 @@ class Register {
             child: uuid,
             rights: 777,
             status: 0,
-            call: req.body.call
+            call: req.body.call,
+            uuid: uuidV1()
           }).table("relations").then(() => {
             res.send(200, {uuid: uuid});
           }).catch((error) => {
