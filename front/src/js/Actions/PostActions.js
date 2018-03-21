@@ -1,29 +1,49 @@
-export const POST_FETCH_LIST = 'POST_FETCH_LIST';
-export const POST_FETCH_LIST_SUCCESS = 'POST_FETCH_LIST_SUCCESS';
-export const POST_FETCH_LIST_FAILED = 'POST_FETCH_LIST_FAILED';
-export const POST_FETCH_DETAIL = 'POST_FETCH_DETAIL';
-export const POST_FETCH_DETAIL_SUCCESS = 'POST_FETCH_DETAIL_SUCCESS';
-export const POST_FETCH_DETAIL_FAILED = 'POST_FETCH_DETAIL_FAILED';
-export const POST_CREATE_ITEM = 'POST_CREATE_ITEM';
+import {
+	POST_CREATE_ITEM,
+  POST_CREATE_ITEM_PART,
+	POST_FETCH_LIST,
+	POST_FETCH_DETAIL,
+	POST_UPDATE_ITEM,
+	POST_REMOVE_ITEM
+} from './../constants/PostConstants'
 
-export function PostCreateItem(data) {
-  return {
-    type: POST_CREATE_ITEM,
-    data
-  }
-}
-
-export function PostFetchList(data) {
-  console.log('triggered')
+export function PostFetchList(userId = null) {
   return {
     type: POST_FETCH_LIST,
-    data
+    userId
+  }
+}
+export function PostFetchDetail(id) {
+  return {
+    type: POST_FETCH_DETAIL,
+    id
   }
 }
 
-export function PostFetchDetail(data) {
+export function PostCreateItem(payload) {
   return {
-    type: POST_FETCH_DETAIL,
-    data
+    type: POST_CREATE_ITEM,
+    payload
+  }
+}
+
+export function PostCreateItemPart(payload) {
+  return {
+    type: POST_CREATE_ITEM_PART,
+    payload
+  }
+}
+
+export function PostUpdateItem(id) {
+  return {
+    type: POST_UPDATE_ITEM,
+    id
+  }
+}
+
+export function PostRemoveItem(id) {
+  return {
+    type: POST_REMOVE_ITEM,
+    id
   }
 }

@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
+    "express-fileupload": "0.4.0",
     "moment": "^2.19.1",
     "nodemon": "^1.12.5",
     "url": "^0.11.0",

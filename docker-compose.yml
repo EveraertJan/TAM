@@ -9,6 +9,7 @@ services:
       - store
     volumes:
       - ./api/src:/tam/src
+      - ./_volumes:/tam/uploads
     environment:
       APP_VERSION_NUMBER:
       APP_VERSION_LABEL:
@@ -28,6 +29,7 @@ services:
     volumes:
       - ./front/public:/tam/public
       - ./front/src:/tam/src
+      - ./_volumes:/tam/uploads
 
   store:
     image: postgres

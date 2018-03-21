@@ -12,6 +12,7 @@ RUN npm install --quiet || cat npm-debug.log
 
 VOLUME /tam/public
 VOLUME /tam/src
+VOLUME /tam/uploads
 
 RUN ls -la /tam
 

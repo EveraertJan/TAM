@@ -7,14 +7,28 @@ import {
   POST_FETCH_DETAIL_SUCCESS,
   POST_FETCH_DETAIL_FAILED,
 
-  POST_CREATE_ITEM
-} from './../Actions/PostActions'
+  POST_CREATE_ITEM,
+  POST_CREATE_ITEM_SUCCESS,
+  POST_CREATE_ITEM_FAILED,
+
+  POST_CREATE_ITEM_PART,
+  POST_CREATE_ITEM_PART_SUCCESS,
+  POST_CREATE_ITEM_PART_FAILED
+} from './../constants/PostConstants'
 
 const initialState = {
   list: [],
-  detail: {},
-  created: {},
-  loading: false
+  detail: {
+    parts: [],
+    data: {}
+  },
+  created: {
+    parts: [],
+    addPart: false,
+    data: {}
+  },
+  loading: false,
+  success: false
 }
 
 export function PostReducer(state = initialState, action) {
@@ -56,13 +70,68 @@ export function PostReducer(state = initialState, action) {
       }
       
     case POST_CREATE_ITEM:
-      return [
+      return {
         ...state,
+        success: false,
+        loading: true
+
+      }
+    case POST_CREATE_ITEM_SUCCESS:
+      const newParts = [
         {
-          text: action.text,
-          completed: false
+          content: 'Create content',
+          order: 0,
+          post_id: action.data.uuid   
         }
       ]
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        created: {
+          ...state.created,
+          data: action.data,
+          parts: newParts
+        }
+      }
+    case POST_CREATE_ITEM_FAILED:
+      return {
+        ...state,
+        success: false,
+        loading: false
+      }
+
+    case POST_CREATE_ITEM_PART:
+      return {
+        ...state,
+        success: false,
+        loading: true
+
+      }
+    case POST_CREATE_ITEM_PART_SUCCESS:
+      const newPartList = [
+        ...action.data,
+        {
+          content: 'Create content',
+          order: 0,
+          post_id: action.data.uuid   
+        }
+      ]
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        created: {
+          ...state.created,
+          parts: newPartList
+        }
+      }
+    case POST_CREATE_ITEM_PART_FAILED:
+      return {
+        ...state,
+        success: false,
+        loading: false
+      }
     default:
       return state
   }

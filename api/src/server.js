@@ -4,14 +4,16 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const uuidV1 = require('uuid/v1');
 const faker = require("faker");
+const fileUpload = require('express-fileupload');
 
 
 const app = express();
 const server = http.Server(app);
 const PORT = 3000;
 
-const UserApp = require('./Fields/User/User.js')
-const PostApp = require('./Fields/Post/Post.js')
+const UserApp = require('./Fields/User/User.js');
+const PostApp = require('./Fields/Post/Post.js');
+const FileApp = require('./Fields/File/File.js');
 
 class App {
 
@@ -39,9 +41,11 @@ class App {
   async start() {
 
     app.use( bodyParser.json() );       // to support JSON-encoded bodies
+    app.use(fileUpload());
 
     app.use(cors({credentials: false, origin: '*'}))
 
+    app.use('/uploads', express.static('/tam/uploads'))
 
 
     app.get('/', async (req, res, next) => {
@@ -50,8 +54,11 @@ class App {
       res.send(result)
     })
 
+
+
     new UserApp( app, this.pg );
     new PostApp( app, this.pg );
+    new FileApp( app, this.pg );
 
 
     server.listen(PORT, () => {
@@ -65,9 +72,12 @@ class App {
     await this.pg.schema.createTableIfNotExists('users', function (table) {
       table.increments();
       table.uuid("uuid");
-      table.string('username').notNullable();
       table.string('password').notNullable();
+      table.string('name_first').notNullable();
+      table.string('name_last').notNullable();
       table.string("usermail");
+      table.string("date_of_birth");
+      table.string("media_id");
       table.timestamps(true, true);
     }).then(function() {
       console.log("created users")
@@ -110,7 +120,7 @@ class App {
       table.increments();
       table.uuid("uuid");
       table.string('title').notNullable();
-      table.string('excerpt').notNullable();
+      table.text('excerpt').notNullable();
       table.string("user_id");
       table.string("media_id");
       table.string('about_id');

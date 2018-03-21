@@ -8,6 +8,7 @@
     "glamor": "^2.20.40",
     "leaflet": "^1.0.3",
     "lodash": "^4.17.4",
+    "moment": "2.21.0",
     "node-sass": "^4.5.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

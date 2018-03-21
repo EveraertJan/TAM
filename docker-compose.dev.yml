@@ -13,3 +13,4 @@ services:
   store:
     ports:
       - ${STORE_PORT}:5432
+

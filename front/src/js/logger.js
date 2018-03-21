@@ -1,3 +1,5 @@
 import logger from 'debug';
 
-export default (name)=>logger(`belair:${name}`);
+export default (name)=>{
+  return logger(`tam/${name}`)
+};

@@ -10,6 +10,7 @@ WORKDIR /tam
 RUN npm install --quiet || cat npm-debug.log
 
 VOLUME /tam/src
+VOLUME /tam/uploads
 
 EXPOSE 3000
 
