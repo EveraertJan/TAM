@@ -19,7 +19,7 @@ class Login {
             const expiresAt = JSON.stringify(new Date().getTime() + 3*24*60*60*1000);
 
             const relations = await pg.select("*").table("relations").where({parent: result[0].uuid}).then((relations) => relations)
-            const profilePic = await pg.select('url').table('media').where({uuid: result[0].media_id}).then((img) => img[0].url )
+            const profilePic = await pg.select('url').table('media').where({uuid: result[0].media_id}).then((img) => { if(img.length > 0){ return img[0].url } else { return '#' } })
             const token = jwt.encode(
               { 
                 usermail: req.body.usermail,

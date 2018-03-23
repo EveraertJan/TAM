@@ -39,13 +39,14 @@ class Register {
       checkToken(777, null, pg, req.headers.authorization, res, async (user) => {
         console.log(user)
         const uuid = uuidV1();
+        const url = (req.body.media_id ? req.body.media_id : '#')
         const data = {
           name_first: req.body.name_first,
           name_last: req.body.name_last,
           uuid: uuid,
           password: 'temp',
           date_of_birth: req.body.date_of_birth,
-          media_id: req.body.media_id
+          media_id: req.body.media_id 
         }
         await pg.insert(data).table("users").returning('*').then(async (data) => {
           await pg.insert({
