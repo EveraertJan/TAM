@@ -25,7 +25,7 @@ services:
     environment:
       REACT_APP_VERSION_NUMBER: ${APP_VERSION_NUMBER}
       REACT_APP_VERSION_LABEL: ${APP_VERSION_LABEL}
-      REACT_APP_API_URL:
+      REACT_APP_API_URL: ${REACT_APP_API_URL}
     volumes:
       - ./front/public:/tam/public
       - ./front/src:/tam/src
