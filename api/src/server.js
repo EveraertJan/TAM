@@ -77,7 +77,7 @@ class App {
       table.string('name_last').notNullable();
       table.string("usermail");
       table.string("date_of_birth");
-      table.string("media_id");
+      table.uuid("media_id");
       table.timestamps(true, true);
     }).then(function() {
       console.log("created users")
