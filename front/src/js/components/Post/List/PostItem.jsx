@@ -29,7 +29,7 @@ class PostItem extends Component {
       <div {...postHolder}>
         { media_id && media.url ? 
             <div {...imageWrap}>
-              <img src={`http://localhost:3000${media.url}`} />
+              <img src={`${process.env.REACT_APP_API_URL}${media.url}`} />
             </div>
            : null
         }
@@ -41,7 +41,7 @@ class PostItem extends Component {
         <Link to={`/post/${uuid}`} className="postCTA">Read More</Link>
         <div className="creatorHolder">
           <div className="user-image-small">
-            <img src={`http://localhost:3000${by.url}`} /> 
+            <img src={`${process.env.REACT_APP_API_URL}${by.url}`} /> 
           </div>
           <span className="creatorName">{by.name_first} {by.name_last}</span>
         </div>

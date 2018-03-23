@@ -91,7 +91,7 @@ class CreateUser extends Component {
         </div>
         <div className="halfBlock">
             <div {...row}>
-              <img src={`http://localhost:3000${this.props.file.image.data.url}`} {...img} />
+              <img src={`${process.env.REACT_APP_API_URL}${this.props.file.image.data.url}`} {...img} />
             </div>
             <div {...row}>
               <label htmlFor="file" {...label}><div className="icon filter-image-inactive"></div>Upload an image </label>

@@ -63,7 +63,7 @@ class MenuApp extends Component{
               return (
                 <Link to={`/${index.uuid}`} key={key}>
                   <div className="user-image-small">
-                    <img src={`http://localhost:3000${index.profilePicture}`} />
+                    <img src={`${process.env.REACT_APP_API_URL}${index.profilePicture}`} />
                   </div>
                   {index.name_first} {index.name_last}
                 </Link>

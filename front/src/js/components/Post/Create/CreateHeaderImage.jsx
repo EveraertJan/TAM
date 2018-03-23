@@ -70,7 +70,7 @@ class CreateHeaderImage extends Component {
             <input id="file" type="file" onChange={this.fileHandler} {...inputfile} />
           </div>
           <div {...row}>
-            <img src={`http://localhost:3000${this.props.file.image.data.url}`} {...img} />
+            <img src={`${process.env.REACT_APP_API_URL}${this.props.file.image.data.url}`} {...img} />
           </div>
       </div>
     )

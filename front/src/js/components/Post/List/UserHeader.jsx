@@ -15,7 +15,7 @@ class UserHeader extends Component {
     return (
       <div>
         <div className="u-full-width userHeader" {...headerImage}>
-          <img src={`http://localhost:3000${url}`} {...headerImage} />
+          <img src={`${process.env.REACT_APP_API_URL}${url}`} {...headerImage} />
         </div>
         <div className="container-wide userInfo" >
           <div {...row}>
@@ -37,7 +37,7 @@ class UserHeader extends Component {
                   return (
                     <Link to={`/user/${admin.uuid}`} key={key}>
                       <div className="user-image-small">
-                        <img src={`http://localhost:3000${admin.url}`} />
+                        <img src={`${process.env.REACT_APP_API_URL}${admin.url}`} />
                       </div>
                     </Link>
                   )

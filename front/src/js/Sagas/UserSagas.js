@@ -24,7 +24,7 @@ function* userLogin(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/login`,
+        url: `${process.env.REACT_APP_API_URL}/login`,
         data: action.payload
       })
       //const user = yield call(Api.fetchUser, action.payload.userId);
@@ -37,7 +37,7 @@ function* userRegister(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/register`,
+        url: `${process.env.REACT_APP_API_URL}/register`,
         data: action.payload
       })
       //const user = yield call(Api.fetchUser, action.payload.userId);
@@ -50,7 +50,7 @@ function* verifyToken(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/verifyToken`,
+        url: `${process.env.REACT_APP_API_URL}/verifyToken`,
         headers: {
           'Authorization': 'bearer: ' + action.token
         }
@@ -65,7 +65,7 @@ function* fetchUser(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://localhost:3000/user/${action.id}`,
+        url: `${process.env.REACT_APP_API_URL}/user/${action.id}`,
         headers: {
           'Authorization': 'bearer: ' + getCookie('jwt')
         }
@@ -81,7 +81,7 @@ function* editUser(action) {
    try {
       const result = yield axios({
         method: 'put',
-        url: `http://localhost:3000/user`,
+        url: `${process.env.REACT_APP_API_URL}/user`,
         data: action.payload,
         headers: {
           'Authorization': 'bearer: ' + getCookie('jwt')

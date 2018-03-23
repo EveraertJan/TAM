@@ -21,9 +21,9 @@ import {
 
 function* postFetchList(action) {
    try {
-    let URL = `http://localhost:3000/post`;
+    let URL = `${process.env.REACT_APP_API_URL}/post`;
     if(action.userId) {
-      URL = `http://localhost:3000/post/user/${action.userId}`;
+      URL = `${process.env.REACT_APP_API_URL}/post/user/${action.userId}`;
     }
       
       const result = yield axios({
@@ -43,7 +43,7 @@ function* postFetchDetail(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://localhost:3000/post/${action.id}`,
+        url: `${process.env.REACT_APP_API_URL}/post/${action.id}`,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`
         }
@@ -59,7 +59,7 @@ function* postCreateItem(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/post/`,
+        url: `${process.env.REACT_APP_API_URL}/post/`,
         data: action.payload,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`
@@ -76,7 +76,7 @@ function* postCreateItemPart(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/post/${action.payload.post_id}`,
+        url: `${process.env.REACT_APP_API_URL}/post/${action.payload.post_id}`,
         data: action.payload,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`

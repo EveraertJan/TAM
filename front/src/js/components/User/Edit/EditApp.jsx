@@ -83,9 +83,9 @@ class EditApp extends Component {
                 <input id="file" type="file" onChange={this.fileHandler} {...inputfile} />
                 <div {...row}>
                   {this.props.file.image.data.url ?
-                    <img src={`http://localhost:3000${this.props.file.image.data.url}`} {...img} />
+                    <img src={`${process.env.REACT_APP_API_URL}${this.props.file.image.data.url}`} {...img} />
                     : 
-                    <img src={`http://localhost:3000${this.props.user.detail.url}`} {...img} />
+                    <img src={`${process.env.REACT_APP_API_URL}${this.props.user.detail.url}`} {...img} />
                   }
                 </div>
               </div>

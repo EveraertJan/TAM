@@ -33,7 +33,7 @@ class MenuBar extends Component{
             <a onClick={this.logout} {...logout}>Log out</a>
             <Link to={`/user/${this.props.user.loggedIn.uuid}`}>
                <div className="user-image-small">
-                <img src={`http://localhost:3000${this.props.user.loggedIn.profilePicture}`} />
+                <img src={`${process.env.REACT_APP_API_URL}${this.props.user.loggedIn.profilePicture}`} />
               </div>
             </Link>
           </div>

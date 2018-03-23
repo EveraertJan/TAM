@@ -13,7 +13,7 @@ function* uploadImage(action) {
 
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/file/upload`,
+        url: `${process.env.REACT_APP_API_URL}/file/upload`,
         data: action.payload,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`

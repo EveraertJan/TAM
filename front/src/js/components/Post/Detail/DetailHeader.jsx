@@ -22,7 +22,7 @@ class DetailHeader extends Component {
       <div {...detailWrap}>
         { media_id ? 
             <div className="u-full-width" {...imageWrap}>
-              <img src={`http://localhost:3000${media.url}`} />
+              <img src={`${process.env.REACT_APP_API_URL}${media.url}`} />
             </div> : null
         }
         <div className="container headerInfo">

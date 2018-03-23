@@ -24,7 +24,7 @@ function* createItem(action) {
 
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/registerChild`,
+        url: `${process.env.REACT_APP_API_URL}/registerChild`,
         data: action.payload,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`
@@ -47,7 +47,7 @@ function* createInfo(action) {
    try {
       const result = yield axios({
         method: 'put',
-        url: `http://localhost:3000/userInfo`,
+        url: `${process.env.REACT_APP_API_URL}/userInfo`,
         data: {
           ...action.payload,
           user_id: action.id
@@ -68,7 +68,7 @@ function* createAdmin(action) {
    try {
       const result = yield axios({
         method: 'post',
-        url: `http://localhost:3000/relation`,
+        url: `${process.env.REACT_APP_API_URL}/relation`,
         data: action.payload,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`
@@ -84,7 +84,7 @@ function* listAdmins(action) {
    try {
       const result = yield axios({
         method: 'get',
-        url: `http://localhost:3000/relation/${action.id}`,
+        url: `${process.env.REACT_APP_API_URL}/relation/${action.id}`,
         headers: {
           Authorization: `bearer: ${getCookie('jwt')}`
         }
