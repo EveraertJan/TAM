@@ -38,32 +38,55 @@ class Profile {
       console.log(req.body)
       checkToken(777, req.body.child, pg, req.headers.authorization, res, async (data) => {
         
-        // create user
-        // TODO: generate pass
-        const newUser = {
-          uuid: uuidV1(),
-          usermail: req.body.usermail,
-          password: 'test',
-          name_first: req.body.name_first,
-          name_last: req.body.name_last
-        }
-        await pg.insert(newUser).table('users').returning('*').then(async(parent) => {
+        const userExists = await pg.select(['usermail', 'uuid']).table('users').where('usermail', req.body.usermail).then((data) => { 
+          if(data.length > 0) { return data[0] } 
+            else { return false }
+        })
 
+        console.log(userExists) 
+
+        if(userExists.uuid) {
           await pg.insert({
             call: req.body.call,
-            parent: parent[0]['uuid'],
+            parent: userExists['uuid'],
             child: req.body.child,
             rights: 333,
             status: 0,
             uuid: uuidV1()
           }).table("relations").returning("*").then((data) => {
-            res.send(200, parent[0])
+            res.send(200, userExists)
           }).catch((error) => {
             res.send(400, error)
           })
-        }).catch((error) => {
-          res.send(400, error)
-        })
+        } else {
+          // create user
+          // TODO: generate pass
+          const newUser = {
+            uuid: uuidV1(),
+            usermail: req.body.usermail,
+            password: 'test',
+            name_first: req.body.name_first,
+            name_last: req.body.name_last
+          }
+
+          await pg.insert(newUser).table('users').returning('*').then(async(parent) => {
+            
+            await pg.insert({
+              call: req.body.call,
+              parent: parent[0]['uuid'],
+              child: req.body.child,
+              rights: 333,
+              status: 0,
+              uuid: uuidV1()
+            }).table("relations").returning("*").then((data) => {
+              res.send(200, parent[0])
+            }).catch((error) => {
+              res.send(400, error)
+            })
+          }).catch((error) => {
+            res.send(400, error)
+          })
+        }
 
 
       })
