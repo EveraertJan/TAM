@@ -50,7 +50,7 @@ class Profile {
             call: req.body.call,
             parent: userExists['uuid'],
             child: req.body.child,
-            rights: 333,
+            rights: 666,
             status: 0,
             uuid: uuidV1()
           }).table("relations").returning("*").then((data) => {
@@ -75,7 +75,7 @@ class Profile {
               call: req.body.call,
               parent: parent[0]['uuid'],
               child: req.body.child,
-              rights: 333,
+              rights: 666,
               status: 0,
               uuid: uuidV1()
             }).table("relations").returning("*").then((data) => {
