@@ -18,7 +18,7 @@ class MenuApp extends Component{
 		return (
 			<div>
 				<MenuBar />
-				<SideMenu />
+				{ this.props.user.loggedIn.uuid ? <SideMenu /> : null }
 			</div>
 			)
 	}
