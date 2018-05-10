@@ -8,7 +8,7 @@ COPY package-lock.json /tam
 WORKDIR /tam
 RUN npm install -g create-react-app
 RUN chown node:node -R .
-RUN npm install --quiet || cat npm-debug.log
+RUN npm install || cat npm-debug.log
 
 VOLUME /tam/public
 VOLUME /tam/src

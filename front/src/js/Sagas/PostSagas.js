@@ -50,6 +50,7 @@ function* postFetchDetail(action) {
       })
       //const user = yield call(Api.fetchUser, action.payload.userId);
       yield put({type: POST_FETCH_DETAIL_SUCCESS, data: result.data});
+      
    } catch (e) {
       yield put({type: POST_FETCH_DETAIL_FAILED, message: e.message});
    }

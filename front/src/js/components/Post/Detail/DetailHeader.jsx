@@ -14,9 +14,22 @@ const imageWrap = css({
     }
 })
 
+const tag = css({
+  color: 'rgba(221, 14, 31, 1)',
+  margin: '0px 5px 20px 0px',
+  float: 'left',
+  display: 'block',
+  padding: '3px',
+  ':hover': {
+    border: '1px solid rgba(221, 14, 31, 1)',
+    borderRadius: '3px',
+    padding: '2px'
+  }
+})
+
 class DetailHeader extends Component {
   render(){
-    const { media_id, media, about, user, title, created_at } = this.props.details;
+    const { media_id, media, about, user, title, created_at, tags } = this.props.details;
     console.log(this.props)
     return (
       <div {...detailWrap}>
@@ -27,7 +40,6 @@ class DetailHeader extends Component {
         }
         <div className="container headerInfo">
           <h1>{title}</h1>
-
           <div className="postWriteDetail">
             <span className="sepText">By</span>
             <Link to="/user/10" className="userLink">{user.name_first} {user.name_last}</Link>
@@ -35,6 +47,11 @@ class DetailHeader extends Component {
             <Link to="/user/2" className="userLink">{about.name_first} {about.name_last}</Link>
             <span className="dateOfWriting">{moment(created_at).format("MMM Do YYYY [at] h:mm")}</span>
           </div>
+          <span className="tags">
+            { tags.map((index, key) => {
+              return <span key={key} {...tag}>{index.title.toLowerCase()}</span>
+            })}
+          </span>
         </div>
       </div>
     )

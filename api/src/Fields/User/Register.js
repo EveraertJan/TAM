@@ -81,6 +81,8 @@ class Register {
               }, config.auth.secret);
 
               fs.mkdir('/tam/uploads/' + uuid);
+              const uuidTag = uuidV1()
+              pg.insert({uuid: uuidTag, title: 'UNTAGGED', user_id: user.uuid, about_id: uuid}).table('tags').returning('*').then((data) => { console.log(data)})
               res.send(200, {token: token, data: data[0]})
 
             })

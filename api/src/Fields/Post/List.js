@@ -22,6 +22,7 @@ class List {
                 if(list[k].media_id !== null ) {
                   list[k]['media'] = await pg.select('*').table('media').where({uuid: list[k].media_id}).then((data) => { return data[0] })
                 }
+                list[k]['tags'] = await pg.select(['tags.title', 'tags.uuid']).table('tagsPivot').innerJoin('tags', 'tagsPivot.tag_id', 'tags.uuid').where('tagsPivot.post_id', list[k].uuid ).then((data) => { return data })
                 console.log('- uuid', list[k].user_id)
                 list[k]['by'] = await pg.select(['users.name_first', 'users.name_last', 'users.uuid', 'media.url']).table('users').leftJoin('media', 'media.uuid', 'users.media_id').where('users.uuid', list[k].user_id).then((data) => { return data[0] })
               }

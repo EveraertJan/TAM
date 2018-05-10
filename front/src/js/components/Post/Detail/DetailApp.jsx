@@ -23,7 +23,7 @@ class PostDetailApp extends Component {
 						{ this.props.post.detail.parts.map((part, key) => {
 							return <DetailPart data={part.content} key={key} />
 						})}
-						<CommentApp />
+						{/*<CommentApp />*/}
 					</div> : null
 				}
 			</span>

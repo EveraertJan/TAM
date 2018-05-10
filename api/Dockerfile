@@ -7,7 +7,7 @@ COPY package-lock.json /tam
 
 WORKDIR /tam
 
-RUN npm install --quiet || cat npm-debug.log
+RUN npm install || cat npm-debug.log
 
 VOLUME /tam/src
 VOLUME /tam/uploads

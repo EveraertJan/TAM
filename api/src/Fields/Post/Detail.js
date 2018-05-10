@@ -11,12 +11,13 @@ class Detail {
           checkToken(666, about[0].about_id, pg, req.headers.authorization, res, async (data) => {
             const uuid = req.params.uuid;
             await pg.select().table('posts').where({uuid: uuid}).then(async (data) => {
-              console.log(data)
               if(data.length > 0) { 
                 data[0]['media'] = await pg.select('*').table('media').where({uuid: data[0].media_id}).then((data) => data[0])
                 data[0]['about'] = await pg.select(['name_first', 'name_last', 'uuid']).table('users').where({uuid: data[0].about_id}).then((data) => data[0])
                 data[0]['user'] = await pg.select(['name_first', 'name_last', 'uuid']).table('users').where({uuid: data[0].user_id}).then((data) => data[0])
                 data[0]['media'] = await pg.select('*').table('media').where({uuid: data[0].media_id}).then((data) => data[0])
+                data[0]['tags'] = await pg.select(['tags.title']).table('tagsPivot').innerJoin('tags', 'tags.uuid', 'tagsPivot.tag_id').where({'tagsPivot.post_id': data[0].uuid}).then((data) => data)
+               
                 await pg.select().from('postsPart').where({post_id: uuid}).then((dataParts) => {
                   const response = data[0];
                   response['parts'] = dataParts;

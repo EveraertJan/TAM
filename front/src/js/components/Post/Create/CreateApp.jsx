@@ -7,8 +7,7 @@ const container = css({
 	marginTop: '100px'
 })
 
-import Createheader from './CreateHeader';
-import CreateHeaderImage from './CreateHeaderImage';
+import CreateHeader from './CreateHeader';
 import CreatePart from './CreatePart'
 
 class CreateApp extends Component {
@@ -16,16 +15,8 @@ class CreateApp extends Component {
 	render(){
 		return (
 			<div {...container}>
-				<CreateHeaderImage />
-				{this.props.file.image.data.uuid ? 
-					<Createheader /> : null }
-				{
-					this.props.post.created.parts.map((part, key) => {
-						return (
-							<CreatePart key={key} values={part} />
-						);
-					})
-				}
+			<CreateHeader />
+				
 				{ this.props.post.created.data.uuid ? 
 					<div className="savePostHolder">
 						<Link to={`/post/${this.props.post.created.data.uuid}`}>Go to post</Link>
@@ -46,3 +37,13 @@ export default connect(state => {
  return {}
  }
 )(CreateApp);
+
+
+/*
+{
+					this.props.post.created.parts.map((part, key) => {
+						return (
+							<CreatePart key={key} values={part} />
+						);
+					})
+				}*/

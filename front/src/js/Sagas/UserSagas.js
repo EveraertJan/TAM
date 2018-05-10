@@ -21,11 +21,12 @@ import {
 } from './../constants/UserConstants.js'
 
 function* userLogin(action) {
+  console.log(action)
    try {
       const result = yield axios({
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/login`,
-        data: action.payload
+        data: action.data
       })
       //const user = yield call(Api.fetchUser, action.payload.userId);
       yield put({type: USER_LOGIN_SUCCESS, data: result.data});
@@ -47,12 +48,14 @@ function* userRegister(action) {
    }
 }
 function* verifyToken(action) {
+
+  const token = (action.data && action.data.token) || action.token
    try {
       const result = yield axios({
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/verifyToken`,
         headers: {
-          'Authorization': 'bearer: ' + action.token
+          'Authorization': 'bearer: ' + token
         }
       })
       //const user = yield call(Api.fetchUser, action.payload.userId);
@@ -103,6 +106,7 @@ function* userSagas() {
   yield takeEvery(VERIFY_USER_TOKEN, verifyToken);
   yield takeEvery(USER_FETCH_DETAIL, fetchUser);
   yield takeEvery(USER_EDIT_ITEM, editUser);
+  yield takeEvery(USER_LOGIN_SUCCESS, verifyToken);
 }
 
 
@@ -112,10 +116,10 @@ function getCookie(cname) {
   var ca = decodedCookie.split(';');
   for(var i = 0; i <ca.length; i++) {
     var c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       return c.substring(name.length, c.length);
     }
   }

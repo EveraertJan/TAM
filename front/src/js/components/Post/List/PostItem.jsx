@@ -10,7 +10,9 @@ const postHolder = css({
  backgroundColor: '#fff',
  padding: '10px',
  boxSizing: 'border-box',
- marginBottom: '20px'
+ marginBottom: '20px',
+ marginLeft: 'calc(50% - 250px)',
+ maxWidth: '500px'
 })
 
 const imageWrap = css({
@@ -21,13 +23,29 @@ const imageWrap = css({
       width: '100%'
     }
 })
+const tags = css({
+
+})
+
+const tag = css({
+  color: 'rgba(221, 14, 31, 1)',
+  margin: '0px 5px 20px 0px',
+  float: 'left',
+  display: 'block',
+  padding: '3px',
+  ':hover': {
+    border: '1px solid rgba(221, 14, 31, 1)',
+    borderRadius: '3px',
+    padding: '2px'
+  }
+})
 
 class PostItem extends Component {
   render(){
-    const { uuid, by, title, excerpt, about_id, user_id, created_at, media_id, media } = this.props.values;
+    const { uuid, by, title, excerpt, about_id, user_id, created_at, media_id, media, tags } = this.props.values;
     return (
       <div {...postHolder}>
-        { media_id && media.url ? 
+        { media && media.url ? 
             <div {...imageWrap}>
               <img src={`${process.env.REACT_APP_API_URL}${media.url}`} />
             </div>
@@ -36,7 +54,11 @@ class PostItem extends Component {
         <div className="textHolder">
           <h1>{title}</h1>
           <span className="postedOn">posted on {moment(created_at).format("MMM Do YYYY [at] h:mm")}</span>
+          
           <p> {excerpt}</p>
+          { tags.map((tagObj, key) => {
+            return <span {...tag} key={key}>{tagObj.title.toLowerCase()}</span>
+          })}
         </div>
         <Link to={`/post/${uuid}`} className="postCTA">Read More</Link>
         <div className="creatorHolder">

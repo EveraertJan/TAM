@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { css } from 'glamor';
 import { container, row, columns} from 'glamor/ous'
+import CreateHeaderImage from './CreateHeaderImage';
 
 import { PostCreateItem } from './../../../actions/PostActions';
 
@@ -42,7 +43,8 @@ class CreateHeader extends Component {
       values: {
         title: "",
         excerpt: "",
-        about_id: props.user.detail.uuid
+        about_id: props.user.detail.uuid,
+        tags: ""
       }
     }
   }
@@ -62,6 +64,7 @@ class CreateHeader extends Component {
   render(){
     return (
       <div className="headerInfo" {...wrap} {...container}>
+        <CreateHeaderImage />
         <div {...row}>
           <input type='text' name='title' onChange={(e) => this.onFieldChange(e, 'title') } placeholder='enter a title' {...h1Box} />
         </div>
@@ -72,9 +75,6 @@ class CreateHeader extends Component {
               <Link to="/user/2" className="userLink">{this.props.user.loggedIn.name_first}</Link>
               <span className="sepText">about</span>
               <select name="kids" className="userSelect" {...spaced} onBlur={(e) => this.onFieldChange(e, 'about_id')}>
-                <option value={this.props.user.loggedIn.uuid} key={1}>
-                  {this.props.user.loggedIn.name_first} {this.props.user.loggedIn.name_last}
-                </option>
                 { this.props.user.loggedIn.admin_of.map((child, key) => {
                   return (
                     <option value={child.uuid} key={key}>
@@ -87,10 +87,13 @@ class CreateHeader extends Component {
           </div>
         </div>
         <div {...row}>
-          <textArea {...excerptBox} onChange={(e) => this.onFieldChange(e, 'excerpt')} defaultValue={'Add a short exceprt'}>
+          <textArea {...excerptBox} onChange={(e) => this.onFieldChange(e, 'excerpt')} defaultValue={'Start writing'}>
 
           </textArea>
         </div>
+        <div {...row}>
+          <input type="text" placeholder={'add tags, separated with ","'} onBlur={(e) => this.onFieldChange(e, 'tags')} />
+        </div> 
         <div {...row}>
           <div {...saveHolder}>
             <span className="postSaveCTA" onClick={this.handleSubmit}>Save</span>

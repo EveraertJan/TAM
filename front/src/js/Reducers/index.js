@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-
+import { reducer as formReducer } from 'redux-form'
 import { PostReducer } from './PostReducer'
 import { UserReducer } from './UserReducer'
 import { GlobalReducer } from './GlobalReducer'
@@ -11,7 +11,9 @@ const tellAboutMe = combineReducers({
   user: UserReducer,
   globals: GlobalReducer,
   child: ChildReducer,
-  file: FileReducer
+  file: FileReducer,
+  form: formReducer
+
 })
 
 export default tellAboutMe

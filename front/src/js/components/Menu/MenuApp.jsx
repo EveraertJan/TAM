@@ -18,23 +18,17 @@ class MenuApp extends Component{
 		return (
 			<div>
 				<MenuBar />
-				{
-					this.props.globals.menu.display ?
-						<SideMenu />
-						: null
-				}
+				<SideMenu />
 			</div>
 			)
 	}
 }
 export default  connect(state => {
 	return {
-		user: state.user,
-		globals: state.globals
+		user: state.user
 	}
 }, dispatch => {
  	return {
- 		toggleMenu: () => dispatch(ToggleSideMenu())
  	}
 }
 )(MenuApp);

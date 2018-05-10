@@ -6,8 +6,8 @@ const Detail = require('./Detail');
 const Edit = require('./Edit');
 
 class User {
-  constructor( app, pg ) {
-    new Login(app, pg);
+  constructor( app, pg , pp) {
+    new Login(app, pg, pp);
     new Register(app, pg);
     new Profile(app, pg);
     new Detail(app, pg);

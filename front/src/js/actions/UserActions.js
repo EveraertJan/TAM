@@ -7,10 +7,10 @@ import {
   USER_EDIT_ITEM
 } from './../constants/UserConstants'
 
-export function loginAction(payload) {
+export function loginAction(data) {
   return {
     type: USER_LOGIN,
-    payload
+    data
   }
 }
 export function verifyUserToken(token) {

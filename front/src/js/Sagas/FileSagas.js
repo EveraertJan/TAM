@@ -6,7 +6,9 @@ import {
   FILE_UPLOAD_IMAGE_SUCCESS,
   FILE_UPLOAD_IMAGE_FAILED,
 
+
 } from './../constants/FileConstants.js'
+
 
 function* uploadImage(action) {
    try {

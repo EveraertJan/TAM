@@ -5,7 +5,7 @@ import { Router, Route } from 'react-router';
 import { container } from 'glamor/ous';
 import { css } from 'glamor'
 
-import LoginUserUnknown from './LoginUserUnknown';
+import LoginForm from './LoginForm';
 import LoginSuccess from './LoginSuccess';
 
 const loginContainer = css({
@@ -25,7 +25,7 @@ class LoginApp extends Component {
         <div {...loginContainer}>
           { this.props.user.login.success ?
             <LoginSuccess /> :
-    				<LoginUserUnknown /> 
+    				<LoginForm /> 
           }
         </div>
 			</div>

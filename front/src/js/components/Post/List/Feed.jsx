@@ -14,22 +14,27 @@ const wrap = css({
 })
 
 const day = css({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
   width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  '> .col': {
-    padding: '10px',
-    boxSizing: 'border-box',
-    flex: '1',
-    float: 'left',
-    flexBasis: 'auto',
-    padding: '10px',
-    boxSizing: 'border-box',
-    alignContent: 'flex-start',
-    maxWidth: '300px',
+  maxWidth: '300px'
+})
+
+const cta = css({
+  position: 'fixed',
+  top: '70px',
+  left: '70px',
+  width: '100px',
+  display: 'block',
+  height: '30px',
+  textAlign: 'center',
+  backgroundColor: 'rgba(221, 14, 31, 1)',
+  color: '#FFF',
+  textDecoration: 'none',
+  lineHeight: '30px',
+  borderRadius: '5px',
+  zIndex: '25',
+  ':hover': {
+    color: '#FFF',
+    backgroundColor: 'rgba(221, 14, 31, .8)'
   }
 })
 
@@ -53,21 +58,12 @@ class Feed extends Component {
     })
     return (
       <div {...wrap}>
-        <Link className="createCTA" to="/create">Tell a story</Link>
-        {Object.keys(postList).map((item, key) => {
-          return (
-            <div {...day} key={key}>
-              {
-                postList[item].map((post, key) => {
-                  return (
-                    <div className='col' key={key}>
-                      {post}
-                    </div>)
-                })
-              }
-            </div>
-          )
-        })}
+        <Link {...cta} to="/create">Tell a story</Link>
+        {
+          this.props.post.list.map((post, key) => {
+            return <PostItem values={post} key={key} />
+          })
+        }
         
       </div>
 

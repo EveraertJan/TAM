@@ -10,7 +10,8 @@ class Login {
     this.comparePass = this.comparePass.bind(this)
 
     app.post('/login',  async (req, res, next) => {
-      pg.select().table("users").where({"usermail": req.body.usermail}).then( async (result) =>{
+      console.log(req.body)
+      await pg.select().table("users").where({"usermail": req.body.username}).then( async (result) =>{
         if(result.length > 0) {
 
           if(this.comparePass(req.body.password, result[0].password)) {

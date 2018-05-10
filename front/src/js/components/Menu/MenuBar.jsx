@@ -21,7 +21,7 @@ class MenuBar extends Component{
     document.cookie = 'jwt=null'
   }
   render(){
-    let prefix = "tell about";
+    let prefix = "Told by";
     
     return (
       <div>

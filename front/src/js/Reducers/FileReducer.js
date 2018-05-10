@@ -5,6 +5,10 @@ import {
 
 } from './../constants/FileConstants'
 
+import {
+  POST_CREATE_ITEM_SUCCESS
+} from './../constants/PostConstants.js'
+
 const initialState = {
   image: {
     loading: false,
@@ -34,6 +38,16 @@ export function FileReducer(state = initialState, action) {
         }
       }
     case FILE_UPLOAD_IMAGE_FAILED: 
+      return {
+        ...state,
+        image: {
+          ...initialState.image,
+          loading: false,
+          success: false
+        }
+      }
+
+    case POST_CREATE_ITEM_SUCCESS:
       return {
         ...state,
         image: {
