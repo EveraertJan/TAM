@@ -56,7 +56,7 @@ class PostItem extends Component {
           <span className="postedOn">posted on {moment(created_at).format("MMM Do YYYY [at] h:mm")}</span>
           
           <p> {excerpt}</p>
-          { tags.map((tagObj, key) => {
+          { tags && tags.map((tagObj, key) => {
             return <span {...tag} key={key}>{tagObj.title.toLowerCase()}</span>
           })}
         </div>
